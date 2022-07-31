@@ -22,7 +22,8 @@ import (
 
 //ゲーム全体に必要なデータを格納
 type Game struct {
-	Map *model.Map
+	Map    *model.Map
+	Player *model.Player
 }
 
 // func init() {
@@ -42,6 +43,7 @@ type Game struct {
 func NewGame() *Game {
 	g := &Game{}
 	g.Map = application.CreateMap()
+	g.Player = application.CreatePlayer()
 	return g
 }
 
@@ -53,7 +55,7 @@ func (g *Game) Update() error {
 //Draw is called each draw cycle and is where we will blit.
 func (g *Game) Draw(screen *ebiten.Image) {
 	application.DrawMap(g.Map, screen)
-
+	application.DrawPlayer(g.Player, screen)
 	// text.Draw(screen, fmt.Sprintf("ABC"), gamerFontS, 0, 0, color.White)
 	// text.Draw(screen, fmt.Sprintf("DEF"), gamerFontS, 0, 32, color.White)
 	// text.Draw(screen, fmt.Sprintf("GHI"), gamerFontS, 32, 0, color.White)
